@@ -1,1 +1,2 @@
 # Arbeitszeiten
+Dieses PowerShell-Script liest die Windows Ereignisanzeige für den Zeitraum des aktuellen Monats und ermittelt für die Tage Mo-Fr das jeweils erste und letzte Ereignis. Die Zeitstempel werden anschließend auf 5 Minuten gerundet, bevor letztendlich eine Tabelle mit den aktiven Zeiten ausgegeben wird.
