@@ -1,3 +1,8 @@
+Param(
+    [switch]$RoundTimes = $False
+)
+
+
 # Setze Culture zu DE
 [System.Threading.Thread]::CurrentThread.CurrentCulture = [System.Globalization.CultureInfo]::GetCultureInfo('de-DE')
 [System.Threading.Thread]::CurrentThread.CurrentUICulture = [System.Globalization.CultureInfo]::GetCultureInfo('de-DE')
@@ -44,8 +49,8 @@ for ($day = $startDate; $day -le $endDate; $day = $day.AddDays(1)) {
     $firstEvent = $dayEvents | Select-Object -First 1
     $lastEvent = $dayEvents | Select-Object -Last 1
 
-    $firstTime = if ($firstEvent) { (Round-Time $firstEvent.TimeCreated).ToString('HH:mm') } else { 'N/A' }
-    $lastTime = if ($lastEvent) { (Round-Time $lastEvent.TimeCreated).ToString('HH:mm') } else { 'N/A' }
+    $firstTime = if ($firstEvent) { if ($RoundTimes) { (Round-Time $firstEvent.TimeCreated).ToString('HH:mm') } else { $firstEvent.TimeCreated.ToString('HH:mm') } } else { 'N/A' }
+    $lastTime =  if ($lastEvent)  { if ($RoundTimes) { (Round-Time $lastEvent.TimeCreated).ToString('HH:mm')  } else { $lastEvent.TimeCreated.ToString('HH:mm')  } } else { 'N/A' }
 
     $eventData += [PSCustomObject]@{
         Datum = $day.ToString('dd.MM.yyyy')
